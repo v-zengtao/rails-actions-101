@@ -46,7 +46,6 @@ jobs:
       env:
         PG_HOST: localhost
         PG_PORT: ${{ job.services.postgres.ports[5432] }}
-        PG_PASSWORD: postgres
         RAILS_ENV: test
       run: |
         bundle exec rails db:create
