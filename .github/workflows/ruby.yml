@@ -23,6 +23,7 @@ jobs:
         image: postgres
         env:
           POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         ports:
           - 5432/tcp
@@ -43,6 +44,7 @@ jobs:
         bundle install
     - name: Run tests
       env:
+        PG_PASSWORD: postgres
         PG_HOST: localhost
         PG_PORT: ${{ job.services.postgres.ports[5432] }}
         RAILS_ENV: test
