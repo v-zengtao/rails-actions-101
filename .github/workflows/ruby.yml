@@ -20,10 +20,9 @@ jobs:
 
     services:
       postgres:
-        image: postgres:12.2
+        image: postgres
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: postgres
         ports:
           - 5432/tcp
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -43,8 +42,8 @@ jobs:
         bundle install
     - name: Run tests
       env:
-        PG_HOST: postgres
-        PG_PORT: 5432
+        PG_HOST: localhost
+        PG_PORT: ${{ job.services.postgres.ports[5432] }}
         RAILS_ENV: test
       run: |
         bundle exec rails db:create
